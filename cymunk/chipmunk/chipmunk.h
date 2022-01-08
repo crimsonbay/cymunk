@@ -19,21 +19,26 @@
  * SOFTWARE.
  */
 
-#ifndef CHIPMUNK_HEADER
-#define CHIPMUNK_HEADER
-
-#ifdef _MSC_VER
-    #define _USE_MATH_DEFINES
-#endif
+#ifndef CHIPMUNK_H
+#define CHIPMUNK_H
 
 #include <stdlib.h>
 #include <math.h>
 
-#ifdef __WIN32__
-// For alloca().
-	#include <malloc.h>
+#ifndef alloca
+	#ifdef _WIN32
+		#include <malloc.h>
+	#elif defined(__FreeBSD__)
+		/* already included in <stdlib.h> */
+	#else
+		#include <alloca.h>
+	#endif
+#endif
+
+#ifdef _WIN32
+	#define CP_EXPORT __declspec(dllexport)
 #else
-	#include <alloca.h>
+	#define CP_EXPORT
 #endif
 
 #ifdef __cplusplus
@@ -172,9 +177,14 @@ cpFloat cpMomentForBox2(cpFloat m, cpBB box);
 /// @c tol is the allowed amount to shrink the hull when simplifying it. A tolerance of 0.0 creates an exact hull.
 int cpConvexHull(int count, cpVect *verts, cpVect *result, int *first, cpFloat tol);
 
-#ifdef _MSC_VER
-#include "malloc.h"
-#include "alloca.h"
+#ifndef alloca
+	#ifdef _WIN32
+		#include <malloc.h>
+	#elif defined(__FreeBSD__)
+		/* already included in <stdlib.h> */
+	#else
+		#include <alloca.h>
+	#endif
 #endif
 
 /// Convenience macro to work with cpConvexHull.
