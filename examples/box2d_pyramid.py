@@ -83,7 +83,7 @@ class PyramidDemo:
         ### Clear the screen
         self.screen.fill(THECOLORS["white"])          
         
-        for shape in self.space.shapes.itervalues():
+        for shape in self.space.shapes.values():
             if shape.body.is_static:
                 body = shape.body
                 pv1 = self.flipyv(body.position + shape.a.cpvrotate(body.rotation_vector))

@@ -81,7 +81,7 @@ def main():
                 if line_point1 is not None:
                     
                     line_point2 = Vec2d(event.pos[X], flipy(event.pos[Y]))
-                    print line_point1, line_point2
+                    print(line_point1, line_point2)
                     body = pm.Body()
                     shape= pm.Segment(body, line_point1, line_point2, 0.0)
                     shape.friction = 0.99

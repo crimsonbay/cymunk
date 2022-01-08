@@ -70,7 +70,7 @@ for x in range(0,101):
     
     offset *= dist**2.8 / 100.
     
-    #print "offset", offset
+    # print("offset", offset)
     
     v.length = scale * (dist + offset) 
     
